@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Button,
   Navbar,
@@ -15,6 +15,8 @@ export default function ControlPanel({
   setRadioValue,
   setSearchName,
   searchName,
+  setOrder,
+  findAthlete,
 }) {
   return (
     <Navbar bg="dark" variant="dark">
@@ -29,14 +31,17 @@ export default function ControlPanel({
               name="radio"
               value={radio.value}
               checked={radioValue === radio.value}
-              onChange={(e) => setRadioValue(e.currentTarget.value)}
+              onChange={({ currentTarget }) =>
+                setRadioValue(currentTarget.value)
+              }
+              onClick={() => setOrder(radio.order)}
             >
               {radio.name}
             </ToggleButton>
           ))}
         </ButtonGroup>
       </Nav>
-      <Form inline>
+      <Form inline onSubmit={findAthlete}>
         <FormControl
           type="text"
           placeholder="Иванов"
