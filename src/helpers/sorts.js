@@ -1,4 +1,4 @@
-const normalSort = (data, field, order) => {
+const normalSort = (data, field, order  ) => {
   const sortData = [...data].sort(sortByField(field, order));
   return sortData;
 };

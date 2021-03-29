@@ -1,6 +1,5 @@
 import React from "react";
 import {
-  Button,
   Navbar,
   Nav,
   Form,
@@ -8,48 +7,42 @@ import {
   ButtonGroup,
   ToggleButton,
 } from "react-bootstrap";
+import TABS from "../../constants";
 
 export default function ControlPanel({
-  searchList,
-  radioValue,
-  setRadioValue,
+  setTabItem,
   setSearchName,
-  searchName,
-  setOrder,
-  findAthlete,
+  inputValue,
+  currentTab,
 }) {
   return (
     <Navbar bg="dark" variant="dark">
       <Navbar.Brand href="#home">Сортировать по</Navbar.Brand>
       <Nav className="mr-auto">
         <ButtonGroup toggle>
-          {searchList.map((radio, idx) => (
+          {TABS.map((tab, idx) => (
             <ToggleButton
               key={idx}
               type="radio"
               variant="secondary"
-              name="radio"
-              value={radio.value}
-              checked={radioValue === radio.value}
-              onChange={({ currentTarget }) =>
-                setRadioValue(currentTarget.value)
-              }
-              onClick={() => setOrder(radio.order)}
+              value={tab.value}
+              checked={currentTab === tab.value}
+              onChange={() => setTabItem(tab)}
             >
-              {radio.name}
+              {tab.name}
             </ToggleButton>
           ))}
         </ButtonGroup>
       </Nav>
-      <Form inline onSubmit={findAthlete}>
+      <Form inline>
         <FormControl
           type="text"
           placeholder="Иванов"
           className="mr-sm-2"
-          value={searchName}
+          value={inputValue}
           onChange={({ target }) => setSearchName(target.value)}
         />
-        <Button variant="outline-info">Найти атлета</Button>
+        <Navbar.Brand>Найти атлета</Navbar.Brand>
       </Form>
     </Navbar>
   );
